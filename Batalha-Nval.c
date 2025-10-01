@@ -49,18 +49,7 @@ void Exibir_Tabuleiro_Batalha_Naval(){
 
 int main(){
     // Tabuleiro que será alimentado pelo usuário
-    int tabuleiro [10][10] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
+    int tabuleiro [10][10] = {0}; //toda a matriz recebe o valor 0 
 
     Exibir_Tabuleiro_Batalha_Naval(); // chama a função exibir tabuleiro
 

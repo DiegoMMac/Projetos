@@ -2,73 +2,63 @@
 
 int main(){
 
-    char linha1[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    int ataque_cruz[3][5] = {
+        {0,0,1,0,0},
+        {1,1,1,1,1},
+        {0,0,1,0,0}};
+
     int tabuleiro [10][10] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
+
+    int linha_origem = 3, coluna_origem = 5;
+    int linha_destino = 10, coluna_destino = 10;
+
+
+    for (int linha = 0; linha < linha_destino; linha++){
+        for (int coluna = 0; coluna < coluna_destino; coluna++){
+            printf("%d ", tabuleiro[linha][coluna]);
+        }
+        printf("\n");
+    }
+    printf("\n\n");
+
+    for (int linha = 0; linha < linha_origem; linha++){
+        for (int coluna = 0; coluna < coluna_origem; coluna++){
+            printf("%d ", ataque_cruz[linha][coluna]);
+        }
+    printf("\n");
+    }
+    printf("\n\n");
+
+    for (int linha = 0; linha < linha_destino; linha++){
+        for (int coluna = 0; coluna < coluna_destino; coluna++){
+            
+            
+            if (linha < linha_origem && coluna < coluna_origem)
+            {
+                tabuleiro[linha][coluna] = ataque_cruz[linha][coluna];
+                
+            }else{
+                tabuleiro[linha][coluna] = 0;
+            }
+            
+            
+            printf("%d ", tabuleiro[linha][coluna]);
+        }
+        printf("\n");
+    }
+    printf("\n\n");
     
-    printf("============== Batalha Naval ===============\n\n");
-        
-    printf("___|");
-    for(int linha = 0; linha <= 9; linha++){
-        
-        printf("_%c_|", linha1[linha]);       
-    }
-    printf("\n");
-
-    int coluna1 = 1;
-
-    for(int contador = 0; contador < 10; contador++){
-        if (coluna1 == 10){
-            printf("_%d|", coluna1);
-        }else{
-            printf("_%d_|", coluna1);
-        }
-        
-        for (int matriz = 0; matriz <= 9 ; matriz++)
-        {
-            printf(" %d |", tabuleiro[contador][matriz]);
-            
-        }
-        coluna1++;
-        printf("\n");
-    }
-    printf("\n");
-
-    tabuleiro[0][0] = 3;
-    tabuleiro[0][1] = 3;
-
-    printf("___|");
-    for(int linha = 0; linha <= 9; linha++){
-        
-        printf("_%c_|", linha1[linha]);       
-    }
-    printf("\n");
-
-    for(int contador = 0; contador < 10; contador++){
-        if (coluna1 == 10){
-            printf("_%d|", coluna1);
-        }else{
-            printf("_%d_|", coluna1);
-        }
-        
-        for (int matriz = 0; matriz <= 9 ; matriz++)
-        {
-            printf(" %d |", tabuleiro[contador][matriz]);
-            
-        }
-        coluna1++;
-        printf("\n");
-    }
-    printf("\n");
+    return 0;
 
 }

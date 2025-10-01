@@ -1,22 +1,15 @@
 #include <stdio.h>
 #include <ctype.h>  
 
-//Função para exibir o tabuleiro
-void Exibir_Tabuleiro_Batalha_Naval(){
 
-    char linha1[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    int tabuleiro [10][10] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
+#define tab_principal 10 //tamanho tabuleiro
+#define tab_ataque_linha 3 //tamanho linha tabuleiro ataque
+#define tab_ataque_coluna 5 //tamanho coluna tabuleiro ataque
+
+//Função para exibir o tabuleiro
+void Exibir_Tabuleiro_Batalha_Naval(int tabuleiro[tab_principal][tab_principal]){
+
+    char linha1[tab_principal] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
     
     printf("============== Batalha Naval ===============\n\n");
         
@@ -47,11 +40,65 @@ void Exibir_Tabuleiro_Batalha_Naval(){
     printf("\n");
 }
 
+void Exibir_Tabuleiros_de_Ataque(int ataque_cruz[tab_ataque_linha][tab_ataque_coluna], int ataque_cone[tab_ataque_linha][tab_ataque_coluna], int ataque_octaedro[tab_ataque_linha][tab_ataque_coluna]){
+
+    printf("=========== Ataques especiais ============\n\n");
+
+    printf("======== Cruz =======\n");
+
+    for(int linha_matriz_ataque = 0; linha_matriz_ataque < 3; linha_matriz_ataque++ ){
+        for(int coluna_matriz_ataque = 0; coluna_matriz_ataque < 5; coluna_matriz_ataque++ ){
+            if (coluna_matriz_ataque == 0){
+                printf("| %d |", ataque_cruz[linha_matriz_ataque][coluna_matriz_ataque]);
+            }else{
+                printf(" %d |", ataque_cruz[linha_matriz_ataque][coluna_matriz_ataque]);
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    printf("======== Cone =======\n");
+
+    for(int linha_matriz_ataque = 0; linha_matriz_ataque < 3; linha_matriz_ataque++ ){
+        for(int coluna_matriz_ataque = 0; coluna_matriz_ataque < 5; coluna_matriz_ataque++ ){
+            if (coluna_matriz_ataque == 0){
+                printf("| %d |", ataque_cone[linha_matriz_ataque][coluna_matriz_ataque]);
+            }else{
+                printf(" %d |", ataque_cone[linha_matriz_ataque][coluna_matriz_ataque]);
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    printf("====== Octaedro =====\n");
+
+    for(int linha_matriz_ataque = 0; linha_matriz_ataque < 3; linha_matriz_ataque++ ){
+        for(int coluna_matriz_ataque = 0; coluna_matriz_ataque < 5; coluna_matriz_ataque++ ){
+            if (coluna_matriz_ataque == 0){
+                printf("| %d |", ataque_octaedro[linha_matriz_ataque][coluna_matriz_ataque]);
+            }else{
+                printf(" %d |", ataque_octaedro[linha_matriz_ataque][coluna_matriz_ataque]);
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n\n");
+
+
+    printf("# Use o meio do ataque como base para lançar no tabuleiro\n\n");
+
+}
+
 int main(){
     // Tabuleiro que será alimentado pelo usuário
-    int tabuleiro [10][10] = {0}; //toda a matriz recebe o valor 0 
+    int tabuleiro [tab_principal][tab_principal] = {0}; //toda a matriz recebe o valor 0 
 
-    Exibir_Tabuleiro_Batalha_Naval(); // chama a função exibir tabuleiro
+    Exibir_Tabuleiro_Batalha_Naval(tabuleiro); // chama a função exibir tabuleiro
 
     char descisao = 'S';
     while (descisao == 'S')
@@ -176,31 +223,8 @@ int main(){
     }
     
 
+    Exibir_Tabuleiro_Batalha_Naval(tabuleiro);
     
-    char linha1[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    printf("============== Batalha Naval ===============\n\n");
-        
-    printf("___|");
-    for(int linha = 0; linha <= 9; linha++){
-        
-        printf("_%c_|", linha1[linha]);       
-    }
-    printf("\n");
-
-    for(int exibir_linha = 0; exibir_linha < 10; exibir_linha++){
-        if(exibir_linha < 9){
-            printf("_%d_|", exibir_linha + 1);
-        }else{
-             printf("_%d|", exibir_linha + 1);
-        }
-        for(int exibir_coluna = 0; exibir_coluna < 10; exibir_coluna++){
-            printf(" %d |", tabuleiro[exibir_linha][exibir_coluna]);
-        }
-        printf("\n");
-
-    }
-    printf("\n");
-
     int ataque_cruz[3][5] = {
         {0,0,1,0,0},
         {1,1,1,1,1},
@@ -218,55 +242,7 @@ int main(){
     };
 
 
-    printf("=========== Ataques especiais ============\n\n");
-
-    printf("======== Cruz =======\n");
-
-    for(int linha_matriz_ataque = 0; linha_matriz_ataque < 3; linha_matriz_ataque++ ){
-        for(int coluna_matriz_ataque = 0; coluna_matriz_ataque < 5; coluna_matriz_ataque++ ){
-            if (coluna_matriz_ataque == 0){
-                printf("| %d |", ataque_cruz[linha_matriz_ataque][coluna_matriz_ataque]);
-            }else{
-                printf(" %d |", ataque_cruz[linha_matriz_ataque][coluna_matriz_ataque]);
-            }
-
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    printf("======== Cone =======\n");
-
-    for(int linha_matriz_ataque = 0; linha_matriz_ataque < 3; linha_matriz_ataque++ ){
-        for(int coluna_matriz_ataque = 0; coluna_matriz_ataque < 5; coluna_matriz_ataque++ ){
-            if (coluna_matriz_ataque == 0){
-                printf("| %d |", ataque_cone[linha_matriz_ataque][coluna_matriz_ataque]);
-            }else{
-                printf(" %d |", ataque_cone[linha_matriz_ataque][coluna_matriz_ataque]);
-            }
-
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    printf("====== Octaedro =====\n");
-
-    for(int linha_matriz_ataque = 0; linha_matriz_ataque < 3; linha_matriz_ataque++ ){
-        for(int coluna_matriz_ataque = 0; coluna_matriz_ataque < 5; coluna_matriz_ataque++ ){
-            if (coluna_matriz_ataque == 0){
-                printf("| %d |", ataque_octaedro[linha_matriz_ataque][coluna_matriz_ataque]);
-            }else{
-                printf(" %d |", ataque_octaedro[linha_matriz_ataque][coluna_matriz_ataque]);
-            }
-
-        }
-        printf("\n");
-    }
-    printf("\n\n");
-
-
-    printf("# Use o meio do ataque como base para lançar no tabuleiro\n\n");
+    Exibir_Tabuleiros_de_Ataque(ataque_cruz, ataque_cone, ataque_octaedro);
 
     int opcao_ataque, linha_ataque, coluna_ataque;
     char letra_coluna_ataque;
@@ -286,7 +262,7 @@ int main(){
     while(verificar_coluna){
 
         printf("Coluna: ");
-        scanf("%c", &letra_coluna_ataque);
+        scanf(" %c", &letra_coluna_ataque);
         letra_coluna_ataque = toupper(letra_coluna_ataque);
 
         if (letra_coluna_ataque == 'A'){            // Vai transformar a letra da coluna em um valor inteiro para locarlizar o indice da matriz
@@ -335,8 +311,6 @@ int main(){
 
     }
 
-    printf("\n");
-
     int verificacao_linha = 1;
     while (verificacao_linha)
     {
@@ -345,7 +319,7 @@ int main(){
         scanf("%d", &linha_ataque);
         printf("\n");
 
-        if (linha_ataque < 1 || linha_ataque > 10){
+        if (linha_ataque < 0 || linha_ataque > 10){
             printf("Linha inválida!\n\n");
         }else
         {
@@ -353,20 +327,82 @@ int main(){
         }
     }
 
-    switch (opcao_ataque)
-    {
-    case 1:
+
+    int linhas_matriz_ataque = 3, colunas_matriz_ataque = 5;
+
+    int centro_linha = 1;  // linha central da matriz de ataque
+    int centro_coluna = 2; // coluna central da matriz de ataque    
+
+    switch (opcao_ataque){
+
+        case 1:
+
+            // sobrepõe a matriz de ataque no centro do tabuleiro
+            for (int i = 0; i < linhas_matriz_ataque; i++) {
+                for (int j = 0; j < colunas_matriz_ataque; j++) {
+                    if (ataque_cruz[i][j] == 1) {
+                        int linha_destino = linha_ataque - centro_linha + i;
+                        int coluna_destino = coluna_ataque - centro_coluna + j;
+
+                        // só atualiza se estiver dentro do tabuleiro
+                        if (linha_destino >= 0 && linha_destino < tab_principal &&
+                            coluna_destino >= 0 && coluna_destino < tab_principal) {
+                            tabuleiro[linha_destino][coluna_destino] = 5;
+                        }
+                    }
+                }
+            }
         
+        break;
         
-    
-    break;
-    
-    default:
+        case 2:
+
+            // sobrepõe a matriz de ataque no centro do tabuleiro
+            for (int i = 0; i < linhas_matriz_ataque; i++) {
+                for (int j = 0; j < colunas_matriz_ataque; j++) {
+                    if (ataque_cone[i][j] == 1) {
+                        int linha_destino = linha_ataque - centro_linha + i;
+                        int coluna_destino = coluna_ataque - centro_coluna + j;
+
+                        // só atualiza se estiver dentro do tabuleiro
+                        if (linha_destino >= 0 && linha_destino < tab_principal &&
+                            coluna_destino >= 0 && coluna_destino < tab_principal) {
+                            tabuleiro[linha_destino][coluna_destino] = 5;
+                        }
+                    }
+                }
+            }
+
+        break;
+
+        case 3:
+
+            // sobrepõe a matriz de ataque no centro do tabuleiro
+            for (int i = 0; i < linhas_matriz_ataque; i++) {
+                for (int j = 0; j < colunas_matriz_ataque; j++) {
+                    if (ataque_octaedro[i][j] == 1) {
+                        int linha_destino = linha_ataque - centro_linha + i;
+                        int coluna_destino = coluna_ataque - centro_coluna + j;
+
+                        // só atualiza se estiver dentro do tabuleiro
+                        if (linha_destino >= 0 && linha_destino < tab_principal &&
+                            coluna_destino >= 0 && coluna_destino < tab_principal) {
+                            tabuleiro[linha_destino][coluna_destino] = 5;
+                        }
+                    }
+                }
+            }
+        break;
+
+        default:
+
+            printf("Opção inválida!\n\n");
+
         break;
     }
 
 
-
+    Exibir_Tabuleiro_Batalha_Naval(tabuleiro);
 
 
     return 0;
